@@ -20,6 +20,7 @@ import (
 // Creds returns credential information obtained from DialSettings, or if none, then
 // it returns default credential information.
 func Creds(ctx context.Context, ds *DialSettings) (*google.Credentials, error) {
+	fmt.Printf("file: %v", ds.CredentialsFile)
 	creds, err := baseCreds(ctx, ds)
 	if err != nil {
 		return nil, err
