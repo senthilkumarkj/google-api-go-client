@@ -52,7 +52,7 @@ func IDTokenSource(ctx context.Context, config IDTokenConfig, opts ...option.Cli
 	clientOpts := append(defaultClientOptions(), opts...)
 	client, _, err := htransport.NewClient(ctx, clientOpts...)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error creating http client: %v", err)
 	}
 
 	its := impersonatedIDTokenSource{
