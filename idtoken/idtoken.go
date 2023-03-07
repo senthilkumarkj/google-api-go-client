@@ -186,7 +186,7 @@ func parseCredType(typeString string) credentialsType {
 	switch typeString {
 	case "service_account":
 		return serviceAccount
-	case "impersonated_service_account":
+	case "impersonated_service_account", "external_account":
 		return impersonatedServiceAccount
 	default:
 		return unknownCredType
