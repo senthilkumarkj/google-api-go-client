@@ -23,7 +23,7 @@ func Creds(ctx context.Context, ds *DialSettings) (*google.Credentials, error) {
 	fmt.Printf("file: %v", ds.CredentialsFile)
 	creds, err := baseCreds(ctx, ds)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to get base creds: %v", err)
 	}
 	if ds.ImpersonationConfig != nil {
 		return impersonateCredentials(ctx, creds, ds)
@@ -39,9 +39,11 @@ func baseCreds(ctx context.Context, ds *DialSettings) (*google.Credentials, erro
 		return ds.Credentials, nil
 	}
 	if ds.CredentialsJSON != nil {
+		fmt.Println("inside credentails JSON")
 		return credentialsFromJSON(ctx, ds.CredentialsJSON, ds)
 	}
 	if ds.CredentialsFile != "" {
+		fmt.Println("inside credentialsFile block")
 		data, err := ioutil.ReadFile(ds.CredentialsFile)
 		if err != nil {
 			return nil, fmt.Errorf("cannot read credentials file: %v", err)
