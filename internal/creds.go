@@ -88,7 +88,7 @@ func credentialsFromJSON(ctx context.Context, data []byte, ds *DialSettings) (*g
 	if err != nil {
 		return nil, fmt.Errorf("google.CredentialsFromJSON() failed: %v", err)
 	}
-
+	fmt.Printf("got creds: %v\n", cred)
 	// Override the token source to use self-signed JWT if conditions are met
 	isJWTFlow, err := isSelfSignedJWTFlow(data, ds)
 	if err != nil {
