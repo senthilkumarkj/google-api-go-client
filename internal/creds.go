@@ -86,7 +86,7 @@ func credentialsFromJSON(ctx context.Context, data []byte, ds *DialSettings) (*g
 	// By default, a standard OAuth 2.0 token source is created
 	cred, err := google.CredentialsFromJSON(ctx, data, ds.GetScopes()...)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("google.CredentialsFromJSON() failed: %v", err)
 	}
 
 	// Override the token source to use self-signed JWT if conditions are met
