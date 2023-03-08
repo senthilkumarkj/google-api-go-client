@@ -100,7 +100,7 @@ func NewTokenSource(ctx context.Context, audience string, opts ...ClientOption) 
 func newTokenSource(ctx context.Context, audience string, ds *internal.DialSettings) (oauth2.TokenSource, error) {
 	creds, err := internal.Creds(ctx, ds)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("newTokenSource: Creds() failed: %v", err)
 	}
 	if len(creds.JSON) > 0 {
 		return tokenSourceFromBytes(ctx, creds.JSON, audience, ds)
