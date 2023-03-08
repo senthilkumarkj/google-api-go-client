@@ -23,7 +23,7 @@ func Creds(ctx context.Context, ds *DialSettings) (*google.Credentials, error) {
 	fmt.Printf("file: %v", ds.CredentialsFile)
 	creds, err := baseCreds(ctx, ds)
 	if err != nil {
-		return nil, fmt.Errorf("failed to get base creds ~~~: %v\n", err)
+		return nil, fmt.Errorf("failed to get base creds ~~~: %v", err)
 	}
 	if ds.ImpersonationConfig != nil {
 		return impersonateCredentials(ctx, creds, ds)
@@ -52,6 +52,7 @@ func baseCreds(ctx context.Context, ds *DialSettings) (*google.Credentials, erro
 		fmt.Printf("got creds from JSON: %v, err: %v\n", cred, err)
 		return cred, err
 	}
+	fmt.Println("should not print this!")
 	if ds.TokenSource != nil {
 		return &google.Credentials{TokenSource: ds.TokenSource}, nil
 	}
