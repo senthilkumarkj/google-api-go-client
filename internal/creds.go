@@ -32,6 +32,7 @@ func Creds(ctx context.Context, ds *DialSettings) (*google.Credentials, error) {
 }
 
 func baseCreds(ctx context.Context, ds *DialSettings) (*google.Credentials, error) {
+	fmt.Println("baseCreds() called")
 	if ds.InternalCredentials != nil {
 		return ds.InternalCredentials, nil
 	}
