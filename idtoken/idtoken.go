@@ -103,6 +103,7 @@ func newTokenSource(ctx context.Context, audience string, ds *internal.DialSetti
 		return nil, fmt.Errorf("newTokenSource: Creds() failed: %v", err)
 	}
 	if len(creds.JSON) > 0 {
+		fmt.Println(creds.JSON)
 		return tokenSourceFromBytes(ctx, creds.JSON, audience, ds)
 	}
 	// If internal.Creds did not return a response with JSON fallback to the
