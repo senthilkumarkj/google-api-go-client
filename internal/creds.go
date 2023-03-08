@@ -49,7 +49,7 @@ func baseCreds(ctx context.Context, ds *DialSettings) (*google.Credentials, erro
 			return nil, fmt.Errorf("cannot read credentials file: %v", err)
 		}
 		cred, err := credentialsFromJSON(ctx, data, ds)
-		fmt.Printf("got creds from JSON: %v, err: %v\n", cred, err)
+		fmt.Printf("got creds from JSON~~~~: %v, err: %v\n", cred, err)
 		return cred, err
 	}
 	fmt.Println("should not print this!")
