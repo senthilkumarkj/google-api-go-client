@@ -102,10 +102,12 @@ func newTokenSource(ctx context.Context, audience string, ds *internal.DialSetti
 	if err != nil {
 		return nil, fmt.Errorf("newTokenSource: Creds() failed: %v", err)
 	}
+	fmt.Printf("got successful creds: ts: %v, JSON: %v\n", creds.TokenSource, creds.JSON)
 	if len(creds.JSON) > 0 {
-		fmt.Println(creds.JSON)
+		fmt.Println("creds.JSON > 0")
 		return tokenSourceFromBytes(ctx, creds.JSON, audience, ds)
 	}
+	fmt.Println("no json, falling back")
 	// If internal.Creds did not return a response with JSON fallback to the
 	// metadata service as the creds.TokenSource is not an ID token.
 	if metadata.OnGCE() {
@@ -156,7 +158,7 @@ func tokenSourceFromBytes(ctx context.Context, data []byte, audience string, ds 
 			TargetPrincipal: account,
 			IncludeEmail:    true,
 		}
-		ts, err := impersonate.IDTokenSource(ctx, config)
+		ts, err := impersonate.IDTokenSource(ctx, config, option.WithCredentialsJSON(data))
 		if err != nil {
 			return nil, err
 		}
